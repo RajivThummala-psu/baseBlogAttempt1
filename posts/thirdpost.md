@@ -1,29 +1,63 @@
 ---
-title: This is my third post.
-description: This is a post on My Blog about win-win survival strategies.
-date: 2018-08-24
+title: Generating a Docker File for your NASA Image Search Repo
+description: This is a post on Generating a Docker File for your NASA Image Search Repo
+date: 2022-02-23
 tags:
   - second tag
   - posts with two tags
 layout: layouts/post.njk
 ---
-Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition. Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment.
+![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/t2kuu6bmcqr4975els0h.png)
 
-``` js/2/4
-// this is a command
-function myCommand() {
-	let counter = 0;
+First started in 2013, Docker is a set of platform as a service products that leverage OS-level virtualization to deliver software in containers. 
 
-	counter++;
+Containers make it easy to put new versions of software, with new business features, into production quickly-and to quickly roll back to a previous version if you need to. A form of virtualization, one single container can be utilized to run anything from a small microservice or software process to a larger application. Inside a container are all the necessary executables, binary code, libraries, and configuration files. Thus, docker is so powerful due to its ability to facilitate the microservice deployment process by leveraging containers to run across different computing environments. 
 
-}
+------------------------------------------------------------------
 
-// Test with a line break above this line.
-console.log('Test');
-```
+To begin, lets ensure that you have a rudimentary understanding of how docker functions. Please run through [this tutorial](https://www.docker.com/play-with-docker) if you are not familiar with docker. 
 
-Bring to the table win-win survival strategies to ensure proactive domination. At the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution. User generated content in real-time will have multiple touchpoints for offshoring.
+If you are not running through the tutorial, ensure that you have your own server through Docker. If you are stuck on this, please run through the aforementioned tutorial. 
 
-## Section Header
+![Your screen should like like this](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/uxuec84i6jwn9ka0ltkq.png)
+ 
+The NASA Image Search Repository already has some adequate functionality. Leveraging microservices, the application can be deployed in a non-taxing way that does not increase in complexity as it is transferred between computing environments. However, there is one way to optimize this deployment: containers. Docker will help us integrate our microservices into containers and will consequently avoid becoming a monolithic application. 
 
-Capitalize on low hanging fruit to identify a ballpark value added activity to beta test. Override the digital divide with additional clickthroughs from DevOps. Nanotechnology immersion along the information highway will close the loop on focusing solely on the bottom line.
+**Setup**
+
+Create ADD NEW INSTANCE in the Docker Playground. Run the following command in the new instance console.
+`git clone https://github.com/IST402-Group-E/ip project/blob/master/src/Nasa.js && cd Nasa.js`
+
+**Configure**
+
+Before we ran any Docker commands, we need to configure our custom settings for this application. These settings will be an API key and the url of your Play With Docker instance.
+
+Run the following command to set up a fresh copy of your environment settings.
+
+`cp dot.env.example dot.env`
+
+What we just done is created a new file called dot.env. Following the configuration as code principle, we are going to add our applications custom settings via environment variables. Docker relies on this pattern to ensure the application thats running inside of it is stateless.
+
+Now we need to populate those settings.
+
+Select the EDITOR button in your docker lab (it is to the right of the orange DELETE button)
+
+Now we need to obtain our api key, which will be our unique password for requesting a new query. Head over to api.nasa.gov to signup and generate an api key for NASA Image search. 
+
+Obtain this key and then insert it into dot.env (replace it with XXXXXXX)
+
+Now select open port in docker
+Type 4000 into the prompt and click "Ok".
+
+You should see a new page that is blank since there is no running application yet. COPY the url that blank page. That's were our server will be accessible when we get this thing running.
+
+Now that we have the public url we can add it to our dot.env and click "Save"
+
+Now just head over to docker and start up the application
+
+Run the following command in your terminal: docker-compose-up. Select port 80 to view our application!
+
+
+
+
+
