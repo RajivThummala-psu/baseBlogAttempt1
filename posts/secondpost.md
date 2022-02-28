@@ -1,7 +1,7 @@
 ---
 title: Generating a Docker File for your NASA Image Search Repo
 description: This is a post on generating a docker file for your NASA image search repo.
-date: 2022-23-01
+date: 2022-02-24
 tags:
   - number 2
 layout: layouts/post.njk
