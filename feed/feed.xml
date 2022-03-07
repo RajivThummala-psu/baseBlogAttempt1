@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+	<title>Rajiv&#39;s first 11ty Blog Attempt</title>
+	<subtitle>I am writing about my experiences as a naval navel-gazer.</subtitle>
+	
+	<link href="https://dev.to/feed/feed.xml" rel="self"/>
+	<link href="https://dev.to/rajivthummalapsu/generating-a-docker-file-for-your-nasa-image-search-repo-100l"/>
+	<updated>2022-02-23T00:00:00Z</updated>
+	<id>https://dev.to/rajivthummalapsu/generating-a-docker-file-for-your-nasa-image-search-repo-100l</id>
+	<author>
+		<name>Rajiv Thummala</name>
+		<email>rkt5192@psu.edu</email>
+	</author>
+	
+	<entry>
+		<title>Generating a Docker File for your NASA Image Search Repo</title>
+		<link href="https://dev.to/posts/thirdpost/"/>
+		<updated>2022-02-23T00:00:00Z</updated>
+		<id>https://dev.to/posts/thirdpost/</id>
+		<content type="html">&lt;p&gt;&lt;img src=&quot;https://dev-to-uploads.s3.amazonaws.com/uploads/articles/t2kuu6bmcqr4975els0h.png&quot; alt=&quot;Image description&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;First started in 2013, Docker is a set of platform as a service products that leverage OS-level virtualization to deliver software in containers.&lt;/p&gt;
+&lt;p&gt;Containers make it easy to put new versions of software, with new business features, into production quickly-and to quickly roll back to a previous version if you need to. A form of virtualization, one single container can be utilized to run anything from a small microservice or software process to a larger application. Inside a container are all the necessary executables, binary code, libraries, and configuration files. Thus, docker is so powerful due to its ability to facilitate the microservice deployment process by leveraging containers to run across different computing environments.&lt;/p&gt;
+&lt;hr /&gt;
+&lt;p&gt;To begin, lets ensure that you have a rudimentary understanding of how docker functions. Please run through &lt;a href=&quot;https://www.docker.com/play-with-docker&quot;&gt;this tutorial&lt;/a&gt; if you are not familiar with docker.&lt;/p&gt;
+&lt;p&gt;If you are not running through the tutorial, ensure that you have your own server through Docker. If you are stuck on this, please run through the aforementioned tutorial.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://dev-to-uploads.s3.amazonaws.com/uploads/articles/uxuec84i6jwn9ka0ltkq.png&quot; alt=&quot;Your screen should like like this&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;The NASA Image Search Repository already has some adequate functionality. Leveraging microservices, the application can be deployed in a non-taxing way that does not increase in complexity as it is transferred between computing environments. However, there is one way to optimize this deployment: containers. Docker will help us integrate our microservices into containers and will consequently avoid becoming a monolithic application.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Setup&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Create ADD NEW INSTANCE in the Docker Playground. Run the following command in the new instance console.&lt;br /&gt;
+&lt;code&gt;git clone https://github.com/IST402-Group-E/ip project/blob/master/src/Nasa.js &amp;amp;&amp;amp; cd Nasa.js&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Configure&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Before we ran any Docker commands, we need to configure our custom settings for this application. These settings will be an API key and the url of your Play With Docker instance.&lt;/p&gt;
+&lt;p&gt;Run the following command to set up a fresh copy of your environment settings.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;cp dot.env.example dot.env&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;What we just done is created a new file called dot.env. Following the configuration as code principle, we are going to add our applications custom settings via environment variables. Docker relies on this pattern to ensure the application thats running inside of it is stateless.&lt;/p&gt;
+&lt;p&gt;Now we need to populate those settings.&lt;/p&gt;
+&lt;p&gt;Select the EDITOR button in your docker lab (it is to the right of the orange DELETE button)&lt;/p&gt;
+&lt;p&gt;Now we need to obtain our api key, which will be our unique password for requesting a new query. Head over to &lt;a href=&quot;http://api.nasa.gov/&quot;&gt;api.nasa.gov&lt;/a&gt; to signup and generate an api key for NASA Image search.&lt;/p&gt;
+&lt;p&gt;Obtain this key and then insert it into dot.env (replace it with XXXXXXX)&lt;/p&gt;
+&lt;p&gt;Now select open port in docker&lt;br /&gt;
+Type 4000 into the prompt and click &amp;quot;Ok&amp;quot;.&lt;/p&gt;
+&lt;p&gt;You should see a new page that is blank since there is no running application yet. COPY the url that blank page. That&#39;s were our server will be accessible when we get this thing running.&lt;/p&gt;
+&lt;p&gt;Now that we have the public url we can add it to our dot.env and click &amp;quot;Save&amp;quot;&lt;/p&gt;
+&lt;p&gt;Now just head over to docker and start up the application&lt;/p&gt;
+&lt;p&gt;Run the following command in your terminal: docker-compose-up. Select port 80 to view our application!&lt;/p&gt;
+</content>
+	</entry>
+	
+	<entry>
+		<title>Feeding IP addresses into the API of GeoIP to Obtain Geographic Coordinates (Lat/Long)</title>
+		<link href="https://dev.to/posts/secondpost/"/>
+		<updated>2022-01-30T00:00:00Z</updated>
+		<id>https://dev.to/posts/secondpost/</id>
+		<content type="html">&lt;p&gt;This will be a brief synopsis and run through on how latitude and longitude coordinates can be detected via GeoIP. Particularly, by feeding IP addresses into the GeoIP API. You can follow along with my &lt;a href=&quot;https://github.com/RajivThummala-psu/ip-project/blob/master/src/LocationFromIP.js&quot;&gt;github repo&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Before we get started, let&#39;s import the necessary dependencies within your project. Since we are going to be wiring up the data to a wikipedia-query tag, we will need to import the following dependency: @lrnwebcomponents/wikipedia-query/wikipedia-query.js&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Make sure you are using the right syntax&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://dev-to-uploads.s3.amazonaws.com/uploads/articles/r8ycv2suy22w095bxten.png&quot; alt=&quot;Image description&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;To complete the setup process we will also need to do npm install @lrnwebcomponents/wikipedia-query&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://dev-to-uploads.s3.amazonaws.com/uploads/articles/csmpiw6tqrlsky52cf0y.png&quot; alt=&quot;Image description&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;As you parse through the constructor repo, you will notice that the first API you run into is: &lt;strong&gt;&lt;a href=&quot;https://freegeoip.app/json/&quot;&gt;https://freegeoip.app/json/&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;This is the GeoIP API. Unfortunately, at the time of this writing, the server is down so I am unable to provide an overview of all the services this API offers in particular. However, you can head over to this link to poke around.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://dev-to-uploads.s3.amazonaws.com/uploads/articles/vyob9fdinxuv9lscbl5k.png&quot; alt=&quot;Image description&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Deciphering the GeoIP API?&lt;/strong&gt;&lt;br /&gt;
+&lt;img src=&quot;https://dev-to-uploads.s3.amazonaws.com/uploads/articles/s433cvg4apylswqwr78k.png&quot; alt=&quot;Image description&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;You will notice that the geoip is set to the locationEndpoint.&lt;/p&gt;
+&lt;p&gt;An endpoint, as adumbrated by &lt;a href=&quot;https://smartbear.com/learn/performance-monitoring/api-endpoints/#:~:text=Each%20endpoint%20is%20the%20location,to%20carry%20out%20their%20function.&amp;amp;text=The%20place%20that%20APIs%20send,lives%2C%20is%20called%20an%20endpoint.&quot;&gt;smartbear.com&lt;/a&gt;, enables&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;APIs to transfer vital information, processes, transactions, and more. API usage will only increase as time goes on, and making sure that each touchpoint in API communication is intact is vital to the success of each API. Endpoints specify where resources can be accessed by APIs and play a key role in guaranteeing the correct functioning of the software that interacts with it.  In short, API performance relies on its ability to communicate effectively with API Endpoints.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Thus, this will serve as an endpoint in which the GeoAPI will retrieve information regarding the client&#39;s location to carry out an operation.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://dev-to-uploads.s3.amazonaws.com/uploads/articles/fcs1fkmabm1x55j3lrhg.png&quot; alt=&quot;Image description&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;You will also notice that GeoIP is referenced in the async getGeoIPData() method. Let&#39;s take some time to pick apart what is going on here.&lt;/p&gt;
+&lt;p&gt;`async getGEOIPData() {&lt;br /&gt;
+const IPClass = new UserIP();&lt;br /&gt;
+const userIPData = await IPClass.updateUserIP();&lt;br /&gt;
+return fetch(this.locationEndpoint + userIPData.ip)&lt;br /&gt;
+.then(resp =&amp;gt; {&lt;br /&gt;
+if (resp.ok) {&lt;br /&gt;
+return resp.json();&lt;br /&gt;
+}&lt;br /&gt;
+return false;&lt;br /&gt;
+})&lt;br /&gt;
+.then(data =&amp;gt; {&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;    console.log(data);
+    this.state = data.region_name; //avoided making the same mistake as last time (reminder --&amp;gt; region name)
+    this.city = data.city;
+    this.location = `${data.city}, ${data.state}`;
+    this.lat = data.latitude; 
+    this.long = data.longitude;
+
+    console.log(`Your coordinates: ${this.lat} ${this.long}`);
+    return data;
+  });`
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;To make it easier, lets split this up into 2 parts to get a better understanding: Obtain information from the API &amp;amp; Feed into LitElement based web component to provide stateful updating of the DOM&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Obtain information from the API&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Lets begin by taking a look at this segment:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;async getGEOIPData() {     const IPClass = new UserIP();     const userIPData = await IPClass.updateUserIP();     return fetch(this.locationEndpoint + userIPData.ip)       .then(resp =&amp;gt; {         if (resp.ok) {           return resp.json();         }         return false;       })&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;The fetch command in particular should strike you as new if you have not worked with this language much. It was for me atleast. However, you will quickly learn from a google search that it works similar to the throw and catch commands from java.&lt;/p&gt;
+&lt;p&gt;What is happening here is that the program is essentially throwing out a mandatory request for the program to provide information regarding the location endpoint, which we instantiated in the constructor. If the program does not get a response, it will catch it (through returning false in this case). As stated earlier, the location endpoint serves as a checkpoint for the API to retrieve information regarding the client&#39;s location.&lt;/p&gt;
+&lt;p&gt;What you will notice also is that &amp;quot;userIPData.ip&amp;quot; is also being fetched. Lets take a look at this further. You can follow along in my repo if that is easier!&lt;/p&gt;
+&lt;p&gt;`async updateUserIP() {&lt;br /&gt;
+return fetch(this.ipLookUp)&lt;br /&gt;
+.then(resp =&amp;gt; {&lt;br /&gt;
+if (resp.ok) {&lt;br /&gt;
+return resp.json();&lt;br /&gt;
+}&lt;br /&gt;
+return false;&lt;br /&gt;
+})&lt;br /&gt;
+.then(data =&amp;gt; {&lt;br /&gt;
+this.ip = data.ip;&lt;br /&gt;
+this.cityYouAreIn = data.city;&lt;br /&gt;
+this.countryYouAreIn = data.country;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;    this.location = `${data.city}, ${data.country}`;
+
+    // this.location = &amp;quot;Your location is: &amp;quot; + data.cityYouAreIn+ &amp;quot;, &amp;quot; + data.countryYouAreIn; //understood that the data. references the getproperties method
+    return data;
+  });
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;}`&lt;/p&gt;
+&lt;p&gt;We will notice here that the updateUserIP method is being used to retrieve information regarding the user&#39;s ip address and listing readable info regarding their whereabouts (city &amp;amp; country). It is also fetching ipLookUP (&lt;a href=&quot;https://ip-fast.com/api/ip/?format=json&amp;amp;location=True&quot;&gt;https://ip-fast.com/api/ip/?format=json&amp;amp;location=True&lt;/a&gt;), which can be found in the constructor in this file.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://dev-to-uploads.s3.amazonaws.com/uploads/articles/oa1uuy43jdvn5qx14amy.png&quot; alt=&quot;Image description&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;ipLookup references an API called ip-fast. ip-fast is an API that analyzes the client&#39;s network activity to approximate their location. In case of error, it will return false to catch.&lt;/p&gt;
+&lt;p&gt;Both of these API&#39;s are thus added together to obtain the geoIPdata. Therefore, what we essentially have here in the async getGEOIPData() method enables us to leverage 2 APIs to retrieve the information that we need. But what do we do now that the data has been fetched?&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Feed into LitElement based web component to provide stateful updating of the DOM&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;`  })&lt;br /&gt;
+.then(data =&amp;gt; {&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;    this.state = data.region_name; //avoided making the same mistake as last time (reminder --&amp;gt; region name)
+    this.city = data.city;
+    this.location = `${data.city}, ${data.state}`;
+    this.lat = data.latitude; 
+    this.long = data.longitude;
+
+    console.log(`Your coordinates: ${this.lat} ${this.long}`);
+    return data;
+  });`
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now if we take a look at this second half of the method, we will notice that the data is actually being entered into the console for use. When I first ran into this section of the program, I actually found it quite easy to interpret despite being unfamiliar with this syntax.&lt;/p&gt;
+&lt;p&gt;We start of with &amp;quot;then the data&amp;quot;...&lt;/p&gt;
+&lt;p&gt;Is used to retrieve information regarding the client&#39;s state. You must call for state through region_name as opposed to just data.state (don&#39;t make the same mistake I did). Next you can see that the city and location are retrieved. We also add both latitude and longitude into our instances so that we can obtain the geographical coordinates. Ensure that you are doing data.latitude and data.longitude NOT data.lat and data.long.&lt;/p&gt;
+&lt;p&gt;These instances are then simply fed into the console.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;console.log(&lt;/code&gt;Your coordinates: ${this.lat} ${this.long}&lt;code&gt;);         return data;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;From here, all you have to do is render. I referenced &lt;a href=&quot;https://codepen.io/btopro/pen/yLNmVbw&quot;&gt;btopro&#39;s codepen&lt;/a&gt; to do this, as you can see in my repo.&lt;/p&gt;
+&lt;p&gt;After copious efforts getting all the bugs out of my code, I am close to getting an accurate solution. I will continue to update the repo as I optimize the program.&lt;/p&gt;
+&lt;p&gt;As you can see, leveraging public API&#39;s to perform functions are seamless and potent. There are a multitude of micro services across the web that can be utilized to achieve a goal in a non-taxing manner.&lt;/p&gt;
+&lt;p&gt;NASA Rendering in particular is a great one, which provides the ability to render images from NASA by leveraging their &lt;a href=&quot;https://api.nasa.gov/api.html#apod&quot;&gt;public api&lt;/a&gt;. This enables individuals that are not affiliated with NASA to easily access this large stack of information with ease.&lt;/p&gt;
+&lt;p&gt;As highlighted by &lt;a href=&quot;https://wilsjame.github.io/how-to-nasa/&quot;&gt;wilsjame&lt;/a&gt;, these are just some of the &lt;a href=&quot;https://api.nasa.gov/api.html#apod&quot;&gt;many APIs&lt;/a&gt; that can be used:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Near Earth Object Web Service (NeoWs): Access to near Earth asteroid information.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Earth Polychromatic Imaging Camera (EPIC): Full disc imagery of the Earth.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Earth Observatory Natural Event Tracker (EONET): Prototype web service providing continuously updated natural event metadata, such as storm imagery, gathered from the Earth’s surface.&lt;br /&gt;
+NASA Image and Video Library: Access to the NASA Image and Video Library.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Sounds (beta): Access to space sounds via SoundClound with some of the hassle abstracted away.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;NASA rendering; render images from NASA using their public API to render the data&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Good luck on your attempt and I thank you for taking your time to read this post.&lt;/p&gt;
+</content>
+	</entry>
+	
+	<entry>
+		<title>An introduction to open-wc</title>
+		<link href="https://dev.to/posts/firstpost/"/>
+		<updated>2022-01-17T00:00:00Z</updated>
+		<id>https://dev.to/posts/firstpost/</id>
+		<content type="html">&lt;p&gt;Upon dipping your feet into the behemoth that is web development, you will quickly realize how non-static this field is. Everything is constantly changing and evolving, from updates to web protocols to constant syntax alterations. Consequently, a 1337 developer must periodically update their toolkit with the new fads and revolutions within the industry.&lt;/p&gt;
+&lt;p&gt;With a sector that is never static, it is vital that the fundamentals of web development are mastered to provide a base in expanding a developer&#39;s toolkit. Perhaps one of the most important fundamentals to grasp is the basics of JavaScript. As adumbrated by tutorialspoint:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Javascript is the most popular programming language in the world and that makes it a programmer’s great choice. Once you learnt Javascript, it helps you developing great front-end as well as back-end softwares using different Javascript based frameworks like jQuery, Node.JS etc. Javascript is everywhere, it comes installed on every modern web browser and so to learn Javascript you really do not need any special environment setup. For example Chrome, Mozilla Firefox , Safari and every browser you know as of today, supports Javascript.Javascript helps you create really beautiful and crazy fast websites. You can develop your website with a console like look and feel and give your users the best Graphical User Experience.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;This article will provide a beginners perspective on how to begin to interact with JavaScript and will facilitate the setup process to begin exploring the language.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;NodeJS &amp;amp; NPM&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Our first journey together in the world of JavaScript will begin by installing a software named &amp;quot;NodeJS&amp;quot;. What exactly is NodeJS?&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;In simple terms, it’s a JavaScript free and open source cross-platform for server-side programming that allows users to build network applications quickly. &lt;a href=&quot;https://medium.com/@LindaVivah/the-beginners-guide-understanding-node-js-express-js-fundamentals-e15493462be1&quot;&gt;Click here to learn more about NodeJS&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Follow the listed steps closely and don&#39;t hesitate to scour the internet further to diagnose any challenges you encounter.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;1)&lt;/strong&gt; Head over to &lt;a href=&quot;https://nodejs.org/en/&quot;&gt;&lt;/a&gt; and select the big green button on the left that reads LTS. In my case, the version is 16.13.2 LTS.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://dev-to-uploads.s3.amazonaws.com/uploads/articles/acy4bjyhnybk6x2ujpqc.png&quot; alt=&quot;Image description&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;Once you finish downloading, proceed to the next step.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;2)&lt;/strong&gt; Next, hold the windows key + R and type &amp;quot;cmd&amp;quot; in the run box that pops up. You can also type &amp;quot;command prompt&amp;quot; into the search bar in your computer if you prefer. This should open up a black box. This is called the terminal or command prompt.&lt;/p&gt;
+&lt;p&gt;Type node-v into your terminal. This will be used to check what version of NodeJS you have downloaded. Moreover, it will be used to check if you have actually downloaded NodeJS.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://dev-to-uploads.s3.amazonaws.com/uploads/articles/evw47bt1u8jvcv3c1gju.png&quot; alt=&quot;You should get something like this&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;You should have something like this. The number following the &amp;quot;v&amp;quot; is your version number. (Don&#39;t worry if it is different than what I have you may proceed to the next step). If you are encountering issues, head over to YouTube to search for a NodeJS download tutorial.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;3)&lt;/strong&gt; Next we are going to make sure that npm downloaded correctly. Npm is a package manner that JavaScript leverages to facilitate the runtime environment.&lt;/p&gt;
+&lt;p&gt;Run the command npm-v to see what version of npm you have downloaded. Again, the same thing applies here. Don&#39;t worry if the numbers following the v are different than the following image. This indicates your version number. If you do not have npm installed, try running the following commmand in your terminal:&lt;/p&gt;
+&lt;p&gt;npm install -g npm&lt;/p&gt;
+&lt;p&gt;If you are still running into trouble, head over to YouTube to search for installation tutorials for npm.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://dev-to-uploads.s3.amazonaws.com/uploads/articles/10lhy60b79hxkwxj0bpb.png&quot; alt=&quot;Image description&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Installing ohmyzsh&lt;/strong&gt;&lt;br /&gt;
+Next we will work on installing ohmyzsh. Zsh will aid tremendously in operating the terminal. Head over to &lt;a href=&quot;https://dev.to/vsalbuq/how-to-install-oh-my-zsh-on-windows-10-home-edition-49g2&quot;&gt;&lt;/a&gt; for any extra explanations on the following steps.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;To start, type &amp;quot;windows powershell&amp;quot; into the search bar in your computer.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&quot;https://dev-to-uploads.s3.amazonaws.com/uploads/articles/x93a14lwcckpj4s8thw6.png&quot; alt=&quot;Image description&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;Select &amp;quot;run as administrator&amp;quot; as depicted in the image. If you do not have windows powershell, I would advise downloading it from the Microsoft Store. Otherwise, you can try running the following steps from your regular terminal/command prompt.&lt;/p&gt;
+&lt;ol start=&quot;2&quot;&gt;
+&lt;li&gt;Run the following command in windows powershell:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart&lt;/p&gt;
+&lt;ol start=&quot;3&quot;&gt;
+&lt;li&gt;
+&lt;p&gt;This leads us into our next step which is to install debian. Head over to the microsoft store on your windows machine and search for &amp;quot;debian&amp;quot;. Install the application as depicted in the following image.&lt;br /&gt;
+&lt;img src=&quot;https://dev-to-uploads.s3.amazonaws.com/uploads/articles/dbo1mhm13bqdtpfin1yh.png&quot; alt=&quot;Image description&quot; /&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Next open up debian either through the microsoft store or by searching for it in the search bar.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Run the following commands in order.&lt;/p&gt;
+&lt;p&gt;$ sudo apt-get update&lt;br /&gt;
+$ sudo apt-get upgrade&lt;br /&gt;
+$ sudo apt-get install zsh&lt;br /&gt;
+$ zsh&lt;br /&gt;
+$ sudo apt-get install curl&lt;br /&gt;
+sh -c &amp;quot;$(curl -fsSL &lt;a href=&quot;https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh&quot;&gt;https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh&lt;/a&gt;)&amp;quot;&lt;/p&gt;
+&lt;ol start=&quot;5&quot;&gt;
+&lt;li&gt;
+&lt;p&gt;Restart debian and make sure that you see .zsh somewhere in the terminal. This lets you know that you have installed zsh correctly.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Next we will be installing the node within zsh.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Understanding how Node works and its primary function is important. As referenced on &lt;a href=&quot;http://medium.com/&quot;&gt;medium.com&lt;/a&gt;,&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Node allows you to execute Javascript code outside of the browser, in a computing environment (such as a server or local development environment) rather then a browser environment.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;In laymans terms, node essentially enables an individual to execute their code in a sandbox environment. (Without causing any real damage). Think of it like practicing an idea for a painting on a sheet of printer paper before starting on the canvas.&lt;/p&gt;
+&lt;p&gt;Run the following command:&lt;/p&gt;
+&lt;p&gt;$ sudo apt-get install build-essential&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://dev-to-uploads.s3.amazonaws.com/uploads/articles/u91t9kbyz8ik6mtt095g.png&quot; alt=&quot;Image description&quot; /&gt;&lt;/p&gt;
+&lt;ol start=&quot;7&quot;&gt;
+&lt;li&gt;Run the following command:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;curl -o- &lt;a href=&quot;https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh&quot;&gt;https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh&lt;/a&gt; | bash&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://dev-to-uploads.s3.amazonaws.com/uploads/articles/sxhwjmcpojq8nhm0y0x4.png&quot; alt=&quot;Image description&quot; /&gt;&lt;/p&gt;
+&lt;ol start=&quot;8&quot;&gt;
+&lt;li&gt;Make sure that you have VSCODE installed before you proceed. If you do not have vscode installed, follow the steps linked in this video and then come back. --&amp;gt; &lt;a href=&quot;https://www.youtube.com/watch?v=V3o57MU5eoE&quot;&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Run the following command:&lt;/p&gt;
+&lt;p&gt;code ~/.zshrc&lt;/p&gt;
+&lt;p&gt;This will open up vscode with a file. Click on the .zshrc tab and paste the following code after the last line.&lt;/p&gt;
+&lt;p&gt;export NVM_DIR=&amp;quot;$HOME/.nvm&amp;quot;&lt;br /&gt;
+[ -s &amp;quot;$NVM_DIR/nvm.sh&amp;quot; ] &amp;amp;&amp;amp; . &amp;quot;$NVM_DIR/nvm.sh&amp;quot;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://dev-to-uploads.s3.amazonaws.com/uploads/articles/sew4kw6zxfohtk9usi9g.png&quot; alt=&quot;Image description&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;Save the VSCODE file (Ctrl + S), then exit VSCODE.&lt;/p&gt;
+&lt;ol start=&quot;9&quot;&gt;
+&lt;li&gt;Open up debian and run the following command:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;nvm install --lts&lt;br /&gt;
+&lt;img src=&quot;https://dev-to-uploads.s3.amazonaws.com/uploads/articles/k6w7p1c72fsyxrm9bqhd.png&quot; alt=&quot;Image description&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;Next run this command: nvm use --lts&lt;/p&gt;
+&lt;p&gt;Nice Work!&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Starting with open-wc&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Now we will take our first dive into working with open-wc.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Before we get started, you will need to create your github account and a repository. Follow the steps in this &lt;a href=&quot;https://www.youtube.com/watch?v=QUtk-Uuq9nE&quot;&gt;video &lt;/a&gt;then proceed to the next step.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Next, you will need to establish a secure, SSH key based handshake with github. Follow the steps in this &lt;a href=&quot;https://docs.github.com/en/authentication/connecting-to-github-with-ssh&quot;&gt;article &lt;/a&gt; to complete this task, then proceed to the next step.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Open your terminal (windows key  + r --&amp;gt; type in cmd in run box). Next you will need to navigate your github repo that you created.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Find your github repo in your file explorer and right click the file to copy the path to your clipboard.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://dev-to-uploads.s3.amazonaws.com/uploads/articles/wphs8dkl3icm74w31mcl.png&quot; alt=&quot;Image description&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;In your terminal, type cd then paste in the file path.&lt;br /&gt;
+This should change your directory to your github repo that you created.&lt;/p&gt;
+&lt;ol start=&quot;4&quot;&gt;
+&lt;li&gt;In the terminal type npm init @open-wc. Wait for the terminal to complete its processing.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&quot;https://dev-to-uploads.s3.amazonaws.com/uploads/articles/mcf0ai8ykt9xqxhdoqtn.png&quot; alt=&quot;Image description&quot; /&gt;&lt;/p&gt;
+&lt;ol start=&quot;5&quot;&gt;
+&lt;li&gt;You should now see a gui that prompts you with some options.&lt;br /&gt;
+Navigate through the UI to select the following options:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;What would you like to do today? &amp;gt;&amp;gt; Scaffold a new project&lt;br /&gt;
+What would you like to scaffold?&amp;gt;&amp;gt; Web Component&lt;br /&gt;
+What would you like to add &lt;em&gt;(just click enter)&lt;/em&gt; &amp;gt;&amp;gt;&lt;br /&gt;
+Would you like to use typescript? &amp;gt;&amp;gt; No&lt;/p&gt;
+&lt;p&gt;_for the following option, replace what follows hello-world with whatever you would like _&lt;/p&gt;
+&lt;p&gt;What is the tagname of your web component &amp;gt;&amp;gt; hello-world_RajivLab1&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://dev-to-uploads.s3.amazonaws.com/uploads/articles/7nm9jm448nhcgl6ojvj2.png&quot; alt=&quot;Image description&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;Write the file to disk and install dependencies.&lt;/p&gt;
+&lt;ol start=&quot;6&quot;&gt;
+&lt;li&gt;Follow the instructions in the terminal.&lt;br /&gt;
+Change the directory to your web component and then run the following command:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;npm run start&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://dev-to-uploads.s3.amazonaws.com/uploads/articles/9lecqublj3pv5k8y0b2m.png&quot; alt=&quot;Image description&quot; /&gt;&lt;/p&gt;
+&lt;ol start=&quot;7&quot;&gt;
+&lt;li&gt;A browser should pop up with localhost in the address. Right click this page and click &amp;quot;view page source&amp;quot;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&quot;https://dev-to-uploads.s3.amazonaws.com/uploads/articles/u1r3y5j4itpiqyf63zca.png&quot; alt=&quot;Image description&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;You now have access to the source code of this page.&lt;/p&gt;
+&lt;ol start=&quot;8&quot;&gt;
+&lt;li&gt;
+&lt;p&gt;Now lets go ahead and begin to decipher what this code is asking of us. Right click and select &amp;quot;Save as&amp;quot; to download the page.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Drag this downloaded file into vscode so that we can comment on the file and start to decipher what the code is doing.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;If this is your first time with JavaScript, start by copy and pasting each line of code into google to try and make sense of it. Leave a comment by typing //your_comment_goes_here to annotate what you believe the code is doing.&lt;/p&gt;
+&lt;p&gt;This &lt;a href=&quot;https://lit.dev/playground/#sample=examples/full-component&quot;&gt;article &lt;/a&gt;will help.&lt;/p&gt;
+&lt;hr /&gt;
+&lt;p&gt;You can access my first ever interaction with this code snippet on my Github which is linked &lt;a href=&quot;https://github.com/RajivThummala-psu/ist402_lab1/blob/main/localhost.htm&quot;&gt;here&lt;/a&gt;. Thank you for reading this article and I wish you good luck on the rest of your JavaScript journey.&lt;/p&gt;
+</content>
+	</entry>
+	
+	<entry>
+		<title>This is my fourth post.</title>
+		<link href="https://dev.to/posts/fourthpost/"/>
+		<updated>2018-09-30T00:00:00Z</updated>
+		<id>https://dev.to/posts/fourthpost/</id>
+		<content type="html">&lt;p&gt;Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition. Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment.&lt;/p&gt;
+&lt;p&gt;Bring to the table win-win survival strategies to ensure proactive domination. At the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution. User generated content in real-time will have multiple touchpoints for offshoring.&lt;/p&gt;
+&lt;h2 id=&quot;section-header&quot; tabindex=&quot;-1&quot;&gt;Section Header &lt;a class=&quot;direct-link&quot; href=&quot;https://dev.to/posts/fourthpost/#section-header&quot; aria-hidden=&quot;true&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Capitalize on low hanging fruit to identify a ballpark value added activity to beta test. Override the digital divide with additional clickthroughs from DevOps. Nanotechnology immersion along the information highway will close the loop on focusing solely on the bottom line.&lt;/p&gt;
+</content>
+	</entry>
+</feed>

@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feeding IP addresses into the API of GeoIP to Obtain Geographic Coordinates (Lat/Long)</title>
+    <meta name="description" content="This is a post on Feeding IP addresses into the API of GeoIP to Obtain Geographic Coordinates (Lat/Long)">
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/prism-base16-monokai.dark.css">
+    <link rel="alternate" href="/feed/feed.xml" type="application/atom+xml" title="Rajiv&#39;s first 11ty Blog Attempt">
+    <link rel="alternate" href="/feed/feed.json" type="application/json" title="Rajiv&#39;s first 11ty Blog Attempt">
+  </head>
+  <body>
+    <header>
+      <h1 class="home"><a href="/">Rajiv&#39;s first 11ty Blog Attempt</a></h1>
+      <ul class="nav">
+        <li class="nav-item"><a href="/">Home</a></li>
+        <li class="nav-item"><a href="/posts/">Archive</a></li>
+        <li class="nav-item"><a href="/about/">About Me</a></li>
+      </ul>
+    </header>
+
+    <main class="tmpl-post">
+
+      <!-- Delete this message -->
+      <div class="warning">
+        <ol>
+          <li>Edit the <code>_data/metadata.json</code> with your blog’s information.</li>
+          <li>(Optional) Edit <code>.eleventy.js</code> with your <a href="https://www.11ty.dev/docs/config/">configuration preferences</a>.</li>
+          <li>Delete this message from <code>_includes/layouts/base.njk</code>.</li>
+        </ol>
+        <p><em>This is an <a href="https://www.11ty.dev/">Eleventy project</a> created from the <a href="https://github.com/11ty/eleventy-base-blog"><code>eleventy-base-blog</code> repo</a>.</em></p>
+      </div>
+      <!-- Stop deleting -->
+
+      <h1>Feeding IP addresses into the API of GeoIP to Obtain Geographic Coordinates (Lat/Long)</h1>
+
+<time datetime="2022-01-30">30 Jan 2022</time><a href="/tags/number-2/" class="post-tag">number 2</a>
+
+<p>This will be a brief synopsis and run through on how latitude and longitude coordinates can be detected via GeoIP. Particularly, by feeding IP addresses into the GeoIP API. You can follow along with my <a href="https://github.com/RajivThummala-psu/ip-project/blob/master/src/LocationFromIP.js">github repo</a>.</p>
+<p>Before we get started, let's import the necessary dependencies within your project. Since we are going to be wiring up the data to a wikipedia-query tag, we will need to import the following dependency: @lrnwebcomponents/wikipedia-query/wikipedia-query.js</p>
+<p><em>Make sure you are using the right syntax</em></p>
+<p><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/r8ycv2suy22w095bxten.png" alt="Image description"></p>
+<p>To complete the setup process we will also need to do npm install @lrnwebcomponents/wikipedia-query</p>
+<p><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/csmpiw6tqrlsky52cf0y.png" alt="Image description"></p>
+<p>As you parse through the constructor repo, you will notice that the first API you run into is: <strong><a href="https://freegeoip.app/json/">https://freegeoip.app/json/</a></strong></p>
+<p>This is the GeoIP API. Unfortunately, at the time of this writing, the server is down so I am unable to provide an overview of all the services this API offers in particular. However, you can head over to this link to poke around.</p>
+<p><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/vyob9fdinxuv9lscbl5k.png" alt="Image description"></p>
+<p><strong>Deciphering the GeoIP API?</strong><br>
+<img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/s433cvg4apylswqwr78k.png" alt="Image description"></p>
+<p>You will notice that the geoip is set to the locationEndpoint.</p>
+<p>An endpoint, as adumbrated by <a href="https://smartbear.com/learn/performance-monitoring/api-endpoints/#:~:text=Each%20endpoint%20is%20the%20location,to%20carry%20out%20their%20function.&amp;text=The%20place%20that%20APIs%20send,lives%2C%20is%20called%20an%20endpoint.">smartbear.com</a>, enables</p>
+<blockquote>
+<p>APIs to transfer vital information, processes, transactions, and more. API usage will only increase as time goes on, and making sure that each touchpoint in API communication is intact is vital to the success of each API. Endpoints specify where resources can be accessed by APIs and play a key role in guaranteeing the correct functioning of the software that interacts with it.  In short, API performance relies on its ability to communicate effectively with API Endpoints.</p>
+</blockquote>
+<p>Thus, this will serve as an endpoint in which the GeoAPI will retrieve information regarding the client's location to carry out an operation.</p>
+<p><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/fcs1fkmabm1x55j3lrhg.png" alt="Image description"></p>
+<p>You will also notice that GeoIP is referenced in the async getGeoIPData() method. Let's take some time to pick apart what is going on here.</p>
+<p>`async getGEOIPData() {<br>
+const IPClass = new UserIP();<br>
+const userIPData = await IPClass.updateUserIP();<br>
+return fetch(this.locationEndpoint + userIPData.ip)<br>
+.then(resp =&gt; {<br>
+if (resp.ok) {<br>
+return resp.json();<br>
+}<br>
+return false;<br>
+})<br>
+.then(data =&gt; {</p>
+<pre><code>    console.log(data);
+    this.state = data.region_name; //avoided making the same mistake as last time (reminder --&gt; region name)
+    this.city = data.city;
+    this.location = `${data.city}, ${data.state}`;
+    this.lat = data.latitude; 
+    this.long = data.longitude;
+
+    console.log(`Your coordinates: ${this.lat} ${this.long}`);
+    return data;
+  });`
+</code></pre>
+<p>To make it easier, lets split this up into 2 parts to get a better understanding: Obtain information from the API &amp; Feed into LitElement based web component to provide stateful updating of the DOM</p>
+<p><strong>Obtain information from the API</strong></p>
+<p>Lets begin by taking a look at this segment:</p>
+<p><code>async getGEOIPData() {     const IPClass = new UserIP();     const userIPData = await IPClass.updateUserIP();     return fetch(this.locationEndpoint + userIPData.ip)       .then(resp =&gt; {         if (resp.ok) {           return resp.json();         }         return false;       })</code></p>
+<p>The fetch command in particular should strike you as new if you have not worked with this language much. It was for me atleast. However, you will quickly learn from a google search that it works similar to the throw and catch commands from java.</p>
+<p>What is happening here is that the program is essentially throwing out a mandatory request for the program to provide information regarding the location endpoint, which we instantiated in the constructor. If the program does not get a response, it will catch it (through returning false in this case). As stated earlier, the location endpoint serves as a checkpoint for the API to retrieve information regarding the client's location.</p>
+<p>What you will notice also is that &quot;userIPData.ip&quot; is also being fetched. Lets take a look at this further. You can follow along in my repo if that is easier!</p>
+<p>`async updateUserIP() {<br>
+return fetch(this.ipLookUp)<br>
+.then(resp =&gt; {<br>
+if (resp.ok) {<br>
+return resp.json();<br>
+}<br>
+return false;<br>
+})<br>
+.then(data =&gt; {<br>
+this.ip = data.ip;<br>
+this.cityYouAreIn = data.city;<br>
+this.countryYouAreIn = data.country;</p>
+<pre><code>    this.location = `${data.city}, ${data.country}`;
+
+    // this.location = &quot;Your location is: &quot; + data.cityYouAreIn+ &quot;, &quot; + data.countryYouAreIn; //understood that the data. references the getproperties method
+    return data;
+  });
+</code></pre>
+<p>}`</p>
+<p>We will notice here that the updateUserIP method is being used to retrieve information regarding the user's ip address and listing readable info regarding their whereabouts (city &amp; country). It is also fetching ipLookUP (<a href="https://ip-fast.com/api/ip/?format=json&amp;location=True">https://ip-fast.com/api/ip/?format=json&amp;location=True</a>), which can be found in the constructor in this file.</p>
+<p><img src="https://dev-to-uploads.s3.amazonaws.com/uploads/articles/oa1uuy43jdvn5qx14amy.png" alt="Image description"></p>
+<p>ipLookup references an API called ip-fast. ip-fast is an API that analyzes the client's network activity to approximate their location. In case of error, it will return false to catch.</p>
+<p>Both of these API's are thus added together to obtain the geoIPdata. Therefore, what we essentially have here in the async getGEOIPData() method enables us to leverage 2 APIs to retrieve the information that we need. But what do we do now that the data has been fetched?</p>
+<p><strong>Feed into LitElement based web component to provide stateful updating of the DOM</strong></p>
+<p>`  })<br>
+.then(data =&gt; {</p>
+<pre><code>    this.state = data.region_name; //avoided making the same mistake as last time (reminder --&gt; region name)
+    this.city = data.city;
+    this.location = `${data.city}, ${data.state}`;
+    this.lat = data.latitude; 
+    this.long = data.longitude;
+
+    console.log(`Your coordinates: ${this.lat} ${this.long}`);
+    return data;
+  });`
+</code></pre>
+<p>Now if we take a look at this second half of the method, we will notice that the data is actually being entered into the console for use. When I first ran into this section of the program, I actually found it quite easy to interpret despite being unfamiliar with this syntax.</p>
+<p>We start of with &quot;then the data&quot;...</p>
+<p>Is used to retrieve information regarding the client's state. You must call for state through region_name as opposed to just data.state (don't make the same mistake I did). Next you can see that the city and location are retrieved. We also add both latitude and longitude into our instances so that we can obtain the geographical coordinates. Ensure that you are doing data.latitude and data.longitude NOT data.lat and data.long.</p>
+<p>These instances are then simply fed into the console.</p>
+<p><code>console.log(</code>Your coordinates: ${this.lat} ${this.long}<code>);         return data;</code></p>
+<p>From here, all you have to do is render. I referenced <a href="https://codepen.io/btopro/pen/yLNmVbw">btopro's codepen</a> to do this, as you can see in my repo.</p>
+<p>After copious efforts getting all the bugs out of my code, I am close to getting an accurate solution. I will continue to update the repo as I optimize the program.</p>
+<p>As you can see, leveraging public API's to perform functions are seamless and potent. There are a multitude of micro services across the web that can be utilized to achieve a goal in a non-taxing manner.</p>
+<p>NASA Rendering in particular is a great one, which provides the ability to render images from NASA by leveraging their <a href="https://api.nasa.gov/api.html#apod">public api</a>. This enables individuals that are not affiliated with NASA to easily access this large stack of information with ease.</p>
+<p>As highlighted by <a href="https://wilsjame.github.io/how-to-nasa/">wilsjame</a>, these are just some of the <a href="https://api.nasa.gov/api.html#apod">many APIs</a> that can be used:</p>
+<ul>
+<li>
+<p>Near Earth Object Web Service (NeoWs): Access to near Earth asteroid information.</p>
+</li>
+<li>
+<p>Earth Polychromatic Imaging Camera (EPIC): Full disc imagery of the Earth.</p>
+</li>
+<li>
+<p>Earth Observatory Natural Event Tracker (EONET): Prototype web service providing continuously updated natural event metadata, such as storm imagery, gathered from the Earth’s surface.<br>
+NASA Image and Video Library: Access to the NASA Image and Video Library.</p>
+</li>
+<li>
+<p>Sounds (beta): Access to space sounds via SoundClound with some of the hassle abstracted away.</p>
+</li>
+<li>
+<p>NASA rendering; render images from NASA using their public API to render the data</p>
+</li>
+</ul>
+<p>Good luck on your attempt and I thank you for taking your time to read this post.</p>
+
+<hr>
+<ul><li>Next: <a href="/posts/thirdpost/">Generating a Docker File for your NASA Image Search Repo</a></li><li>Previous: <a href="/posts/firstpost/">An introduction to open-wc</a></li>
+</ul>
+
+    </main>
+
+    <footer></footer>
+
+    <!-- Current page: /posts/secondpost/ -->
+  </body>
+</html>
