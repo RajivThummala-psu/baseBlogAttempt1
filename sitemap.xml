@@ -2,67 +2,67 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://dev.to/posts/fourthpost/</loc>
+    <loc>https://dev.to/baseBlogAttempt1/posts/fourthpost/</loc>
     <lastmod>2018-09-30</lastmod>
   </url>
   
   <url>
-    <loc>https://dev.to/posts/firstpost/</loc>
+    <loc>https://dev.to/baseBlogAttempt1/posts/firstpost/</loc>
     <lastmod>2022-01-17</lastmod>
   </url>
   
   <url>
-    <loc>https://dev.to/posts/secondpost/</loc>
+    <loc>https://dev.to/baseBlogAttempt1/posts/secondpost/</loc>
     <lastmod>2022-01-30</lastmod>
   </url>
   
   <url>
-    <loc>https://dev.to/posts/thirdpost/</loc>
+    <loc>https://dev.to/baseBlogAttempt1/posts/thirdpost/</loc>
     <lastmod>2022-02-23</lastmod>
   </url>
   
   <url>
-    <loc>https://dev.to/about/</loc>
+    <loc>https://dev.to/baseBlogAttempt1/about/</loc>
     <lastmod>2022-03-07</lastmod>
   </url>
   
   <url>
-    <loc>https://dev.to/posts/</loc>
+    <loc>https://dev.to/baseBlogAttempt1/posts/</loc>
     <lastmod>2022-03-07</lastmod>
   </url>
   
   <url>
-    <loc>https://dev.to/</loc>
+    <loc>https://dev.to/baseBlogAttempt1/</loc>
     <lastmod>2022-03-07</lastmod>
   </url>
   
   <url>
-    <loc>https://dev.to/page-list/</loc>
+    <loc>https://dev.to/baseBlogAttempt1/page-list/</loc>
     <lastmod>2022-03-07</lastmod>
   </url>
   
   <url>
-    <loc>https://dev.to/tags/</loc>
+    <loc>https://dev.to/baseBlogAttempt1/tags/</loc>
     <lastmod>2022-03-07</lastmod>
   </url>
   
   <url>
-    <loc>https://dev.to/tags/another-tag/</loc>
+    <loc>https://dev.to/baseBlogAttempt1/tags/another-tag/</loc>
     <lastmod>2022-03-07</lastmod>
   </url>
   
   <url>
-    <loc>https://dev.to/tags/second-tag/</loc>
+    <loc>https://dev.to/baseBlogAttempt1/tags/second-tag/</loc>
     <lastmod>2022-03-07</lastmod>
   </url>
   
   <url>
-    <loc>https://dev.to/tags/number-2/</loc>
+    <loc>https://dev.to/baseBlogAttempt1/tags/number-2/</loc>
     <lastmod>2022-03-07</lastmod>
   </url>
   
   <url>
-    <loc>https://dev.to/tags/posts-with-two-tags/</loc>
+    <loc>https://dev.to/baseBlogAttempt1/tags/posts-with-two-tags/</loc>
     <lastmod>2022-03-07</lastmod>
   </url>
 </urlset>

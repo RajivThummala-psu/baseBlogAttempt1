@@ -3,7 +3,7 @@
 	<title>Rajiv&#39;s first 11ty Blog Attempt</title>
 	<subtitle>I am writing about my experiences as a naval navel-gazer.</subtitle>
 	
-	<link href="https://dev.to/feed/feed.xml" rel="self"/>
+	<link href="https://dev.to/baseBlogAttempt1/feed/feed.xml" rel="self"/>
 	<link href="https://dev.to/rajivthummalapsu/generating-a-docker-file-for-your-nasa-image-search-repo-100l"/>
 	<updated>2022-02-23T00:00:00Z</updated>
 	<id>https://dev.to/rajivthummalapsu/generating-a-docker-file-for-your-nasa-image-search-repo-100l</id>
@@ -14,9 +14,9 @@
 	
 	<entry>
 		<title>Generating a Docker File for your NASA Image Search Repo</title>
-		<link href="https://dev.to/posts/thirdpost/"/>
+		<link href="https://dev.to/baseBlogAttempt1/posts/thirdpost/"/>
 		<updated>2022-02-23T00:00:00Z</updated>
-		<id>https://dev.to/posts/thirdpost/</id>
+		<id>https://dev.to/baseBlogAttempt1/posts/thirdpost/</id>
 		<content type="html">&lt;p&gt;&lt;img src=&quot;https://dev-to-uploads.s3.amazonaws.com/uploads/articles/t2kuu6bmcqr4975els0h.png&quot; alt=&quot;Image description&quot; /&gt;&lt;/p&gt;
 &lt;p&gt;First started in 2013, Docker is a set of platform as a service products that leverage OS-level virtualization to deliver software in containers.&lt;/p&gt;
 &lt;p&gt;Containers make it easy to put new versions of software, with new business features, into production quickly-and to quickly roll back to a previous version if you need to. A form of virtualization, one single container can be utilized to run anything from a small microservice or software process to a larger application. Inside a container are all the necessary executables, binary code, libraries, and configuration files. Thus, docker is so powerful due to its ability to facilitate the microservice deployment process by leveraging containers to run across different computing environments.&lt;/p&gt;
@@ -48,9 +48,9 @@ Type 4000 into the prompt and click &amp;quot;Ok&amp;quot;.&lt;/p&gt;
 	
 	<entry>
 		<title>Feeding IP addresses into the API of GeoIP to Obtain Geographic Coordinates (Lat/Long)</title>
-		<link href="https://dev.to/posts/secondpost/"/>
+		<link href="https://dev.to/baseBlogAttempt1/posts/secondpost/"/>
 		<updated>2022-01-30T00:00:00Z</updated>
-		<id>https://dev.to/posts/secondpost/</id>
+		<id>https://dev.to/baseBlogAttempt1/posts/secondpost/</id>
 		<content type="html">&lt;p&gt;This will be a brief synopsis and run through on how latitude and longitude coordinates can be detected via GeoIP. Particularly, by feeding IP addresses into the GeoIP API. You can follow along with my &lt;a href=&quot;https://github.com/RajivThummala-psu/ip-project/blob/master/src/LocationFromIP.js&quot;&gt;github repo&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Before we get started, let&#39;s import the necessary dependencies within your project. Since we are going to be wiring up the data to a wikipedia-query tag, we will need to import the following dependency: @lrnwebcomponents/wikipedia-query/wikipedia-query.js&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Make sure you are using the right syntax&lt;/em&gt;&lt;/p&gt;
@@ -169,9 +169,9 @@ NASA Image and Video Library: Access to the NASA Image and Video Library.&lt;/p&
 	
 	<entry>
 		<title>An introduction to open-wc</title>
-		<link href="https://dev.to/posts/firstpost/"/>
+		<link href="https://dev.to/baseBlogAttempt1/posts/firstpost/"/>
 		<updated>2022-01-17T00:00:00Z</updated>
-		<id>https://dev.to/posts/firstpost/</id>
+		<id>https://dev.to/baseBlogAttempt1/posts/firstpost/</id>
 		<content type="html">&lt;p&gt;Upon dipping your feet into the behemoth that is web development, you will quickly realize how non-static this field is. Everything is constantly changing and evolving, from updates to web protocols to constant syntax alterations. Consequently, a 1337 developer must periodically update their toolkit with the new fads and revolutions within the industry.&lt;/p&gt;
 &lt;p&gt;With a sector that is never static, it is vital that the fundamentals of web development are mastered to provide a base in expanding a developer&#39;s toolkit. Perhaps one of the most important fundamentals to grasp is the basics of JavaScript. As adumbrated by tutorialspoint:&lt;/p&gt;
 &lt;blockquote&gt;
@@ -322,12 +322,12 @@ Change the directory to your web component and then run the following command:&l
 	
 	<entry>
 		<title>This is my fourth post.</title>
-		<link href="https://dev.to/posts/fourthpost/"/>
+		<link href="https://dev.to/baseBlogAttempt1/posts/fourthpost/"/>
 		<updated>2018-09-30T00:00:00Z</updated>
-		<id>https://dev.to/posts/fourthpost/</id>
+		<id>https://dev.to/baseBlogAttempt1/posts/fourthpost/</id>
 		<content type="html">&lt;p&gt;Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition. Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment.&lt;/p&gt;
 &lt;p&gt;Bring to the table win-win survival strategies to ensure proactive domination. At the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards a streamlined cloud solution. User generated content in real-time will have multiple touchpoints for offshoring.&lt;/p&gt;
-&lt;h2 id=&quot;section-header&quot; tabindex=&quot;-1&quot;&gt;Section Header &lt;a class=&quot;direct-link&quot; href=&quot;https://dev.to/posts/fourthpost/#section-header&quot; aria-hidden=&quot;true&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;h2 id=&quot;section-header&quot; tabindex=&quot;-1&quot;&gt;Section Header &lt;a class=&quot;direct-link&quot; href=&quot;https://dev.to/baseBlogAttempt1/posts/fourthpost/#section-header&quot; aria-hidden=&quot;true&quot;&gt;#&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;Capitalize on low hanging fruit to identify a ballpark value added activity to beta test. Override the digital divide with additional clickthroughs from DevOps. Nanotechnology immersion along the information highway will close the loop on focusing solely on the bottom line.&lt;/p&gt;
 </content>
 	</entry>
