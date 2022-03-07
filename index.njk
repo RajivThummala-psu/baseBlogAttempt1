@@ -4,6 +4,10 @@ eleventyNavigation:
   key: Home
   order: 1
 ---
+<body style="background-color:rgb(245, 117, 31);">
+
+<img src="https://media4.giphy.com/media/qgQUggAC3Pfv687qPC/giphy.gif" alt="Italian Trulli">
+
 {% set maxPosts = collections.posts.length | min(3) %}
 <h1>Latest {% if maxPosts == 1 %}Post{% else %}{{ maxPosts }} Posts{% endif %}</h1>
 
@@ -12,3 +16,4 @@ eleventyNavigation:
 {% include "postslist.njk" %}
 
 <p>More posts can be found in <a href="{{ '/posts/' | url }}">the archive</a>.</p>
+</body>
